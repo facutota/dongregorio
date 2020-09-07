@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import CardList from '../components/CardList';
 import SearchBox from '../components/SearchBox';
 import Scroll from '../components/Scroll';
-import ErrorBoundry from '../components/ErrorBoundry'
 import './App.css';
 
 
@@ -28,27 +27,25 @@ class App extends Component {
 	}
 
 	render(){
-		const { caminones, searchfield } = this.state;
-		const filteredCamiones = camiones.filter(camion => {
-			return camion.name.toLowerCase().includes(searchfield.toLowerCase());
+		const filteredCamiones = this.state.camiones.filter(camion => {
+			return camion.name.toLowerCase().includes(this.state.searchfield.toLowerCase());
 		})
-		
-			return !camiones.length ?
-				<h1> Loading </h1> :
-				 (
+		if(this.state.camiones.length === 0){
+			return <h1> Loading </h1>
+		}else{
+
+			return (
 					<div className = 'tc'>
 						<h1 className='f2' >Camiones Don Gregorio</h1>
 						<SearchBox searchChange={this.onSearchChange} />
 						<Scroll>
-							<ErrorBoundry>
-								<CardList camiones={filteredCamiones} />
-							</ErrorBoundry>
+							<CardList camiones={filteredCamiones} />
 						</Scroll>
 
 					</div>
 					);
 		}
-		
+		}
 
 	}
 	
