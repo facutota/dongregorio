@@ -5,48 +5,41 @@ import SearchBox from '../components/SearchBox';
 import Scroll from '../components/Scroll';
 import './App.css';
 
-import {setSearchField } from '../actions';
+import {setSearchField, requestCamiones } from '../actions';
 
 const mapStateToProps = state => {
 	return {
-		searchField: state.searchField
+		searchField: state.searchCamiones.searchField,
+		camiones: state.requestCamiones.camiones,
+		isPending: state.requestCamiones.isPending,
+		error: state.requestCamiones.error
 	}
 }
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		onSearchChange: (event) => dispatch(setSearchField(event.target.value))
+		onSearchChange: (event) => dispatch(setSearchField(event.target.value)),
+		onRequestCamiones: () => dispatch(requestCamiones())
 	}
 }
 
 class App extends Component {
 	
-	constructor(){
-		super()
-		this.state = {
-			camiones: []		
-		}
-	}
-
 	componentDidMount(){
-		fetch('https://jsonplaceholder.typicode.com/users')
-			.then(response => response.json())
-			.then(users => this.setState({ camiones: users}));
+		this.props.onRequestCamiones();
 	}
 
 	
 
 	render(){
-		const { camiones } = this.state;
-		const { searchField, onSearchChange } = this.props;
+		const { searchField, onSearchChange, camiones, isPending } = this.props;
 		const filteredCamiones = camiones.filter(camion => {
 			return camion.name.toLowerCase().includes(searchField.toLowerCase());
 		})
-		if(camiones.length === 0){
-			return <h1> Loading </h1>
-		}else{
 
-			return (
+		return isPending ?
+			<h1> Loading </h1> :
+		 	(
 					<div className = 'tc'>
 						<h1 className='f2' >Camiones Don Gregorio</h1>
 						<SearchBox searchChange={onSearchChange} />
@@ -55,9 +48,9 @@ class App extends Component {
 						</Scroll>
 
 					</div>
-					);
+			);
 		}
-		}
+		
 
 	}
 	
