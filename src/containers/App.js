@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import CardList from '../components/CardList';
 import SearchBox from '../components/SearchBox';
 import Scroll from '../components/Scroll';
+import Logo from '../components/logo/Logo';
 import './App.css';
 
 import {setSearchField, requestCamiones } from '../actions';
@@ -40,8 +41,10 @@ class App extends Component {
 		return isPending ?
 			<h1> Loading </h1> :
 		 	(
-					<div className = 'tc'>
+					<div className = 'tc'>	
+						<Logo className = 'center'/>					
 						<h1 className='f2' >Camiones Don Gregorio</h1>
+						
 						<SearchBox searchChange={onSearchChange} />
 						<Scroll>
 							<CardList camiones={filteredCamiones} />
