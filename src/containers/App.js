@@ -42,7 +42,7 @@ class App extends Component {
 			<h1> Loading </h1> :
 		 	(
 					<div className = 'tc'>	
-						<Logo className = 'center'/>					
+						<Logo />					
 						<h1 className='f2' >Camiones Don Gregorio</h1>
 						
 						<SearchBox searchChange={onSearchChange} />

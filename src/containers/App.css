@@ -10,3 +10,8 @@ h1 {
   font-weight: 200;
   color: #0ccac4;
 }
+
+.center{
+	display: flex;
+	justify-content: center;
+}
