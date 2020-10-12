@@ -8,13 +8,14 @@ const CardList = ({camiones}) => {
 	return (
 		<div>
 		{
-			camiones.map((user , i) => {
+			camiones.map((camion , i) => {
 				return (
 				<Card 
 					key={camiones[i].id} 
 					id={camiones[i].id} 
 					name={camiones[i].name} 
 					email={camiones[i].email}
+					image={camiones[i].image}
 					/>
 				);
 			})

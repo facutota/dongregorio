@@ -1,4 +1,4 @@
-export const camiones = [
+[
   {
     id: 1,
     image: 'https://icdn4.digitaltrends.com/image/digitaltrends_es/ups-tusimple-768x576.jpg',
